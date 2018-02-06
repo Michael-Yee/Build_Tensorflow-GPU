@@ -1,13 +1,14 @@
-How to build Tensorflow-GPU from source
+#How to build Tensorflow-GPU from source
 
 By Michael Yee
 
 In this blog, I will be describing the step by step instructions to install TensorFlow-GPU version 1.5.0-rc1 into a Python 3.5 Virtualenv environment on Ubuntu 16.04 (64bit).
 
-Step 1: Pre-installation
+## Step 1: Pre-installation
 a) Verify the system has a CUDA-capable GPU
 
-$ lspci | grep -i nvidia
+    $ lspci | grep -i nvidia
+    
 If you do not see any settings, update the PCI hardware database that Linux maintains by entering update-pciids (generally found in /sbin) at the command line and rerun the previous lspci command.
 
 If your graphics card is from NVIDIA and it is listed in http://developer.nvidia.com/cuda-gpus, your GPU is CUDA-capable.
@@ -15,7 +16,8 @@ If your graphics card is from NVIDIA and it is listed in http://developer.nvidia
 NOTE: Write down the Compute Capability value for later use in section: Installing TensorFlow from sources - Configure the installation
 b) Verify your NVIDIA graphics driver is 384.81 or newer
 
-$ nvidia-smi
+    $ nvidia-smi
+
 You should see the driver version in the top of the output similar to the following:
 
 +-------------------------------------------------------------------------+
@@ -31,9 +33,11 @@ To install up-to-date NVIDIA graphics drivers, go to NVIDIA download drivers and
 
 c) Verify your version of Linux is supported
 
-$ uname -m && cat /etc/*release
+    $ uname -m && cat /etc/*release
+    
 You should see output similar to the following:
 
+```
 x86_64
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
@@ -50,6 +54,8 @@ SUPPORT_URL="http://help.ubuntu.com/"
 BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
+```
+
 The first and most important line containing x86_64, indicates you are running on a 64-bit system which is supported by CUDA. The CUDA Development Tools are only supported on some specific distributions of Linux. These are listed in the CUDA Toolkit release notes.
 
 d) Update all the Ubuntu things!
