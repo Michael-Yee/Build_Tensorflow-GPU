@@ -21,14 +21,23 @@ b) Verify your NVIDIA graphics driver is 384.81 or newer
 You should see the driver version in the top of the output similar to the following:
 
 +-------------------------------------------------------------------------+
+
 | NVIDIA-SMI 390.12                 Driver Version: 390.12                |
+
 |-------------------------------+----------------------+------------------+
+
 | GPU  Name        Persistence-M| Bus-Id   Disp.A | Volatile Uncorr. ECC | 
+
 | Fan  Temp  Perf  Pwr:Usage/Cap|    Memory-Usage | GPU-Util  Compute M. |
+
 |===============================+=================+======================|
+
 |   0  GeForce GTX 108...  Off  | 000:01:00.0  On |                  N/A |
+
 |  0%   30C    P8    17W / 275W |    522MiB / 11175MiB |      0% Default |
+
 +-------------------------------+----------------------+-----------------+
+
 To install up-to-date NVIDIA graphics drivers, go to NVIDIA download drivers and follow the instructions
 
 c) Verify your version of Linux is supported
@@ -71,6 +80,7 @@ You should see output similar to the following:
     4.4.0-104-generic
 
 NOTE: NVIDIA recommend a kernel version of 4.4, otherwise the NVIDIA driver may not start.  
+
 The kernel headers and development packages for the currently running kernel can be installed with:
 
     $ sudo apt-get install linux-headers-$(uname -r)
@@ -117,6 +127,7 @@ d) Install CUDA
     $ sudo apt-get install cuda
     
 CUDA environment set-up
+
 a) The PATH variable needs to include /usr/local/cuda-9.1/bin and the LD_LIBRARY_PATH variable needs to contain /usr/local/cuda-9.1/lib64
 
 Edit ~/.bashrc and save the following to the end of the file:
@@ -172,7 +183,9 @@ Test passed!
 
 NOTE: cuDNN v7 can coexist with previous versions of cuDNN, such as v5 or v6
 Installing TensorFlow from sources
+
 Download and unzip TensorFlow
+
 a) Create and navigate to a directory to containing TensorFlow files
 
 b) Download TensorFlow
@@ -188,6 +201,7 @@ d) Navigate into the unzipped TensorFlow folder
     $ cd tensorflow-1.5.0-rc1 
     
 Configure the installation
+
 The root of the source tree contains a bash script named configure. This script asks you to identify the pathname of all relevant TensorFlow dependencies and specify other build configuration options such as compiler flags. You must run this script prior to creating the pip package and installing TensorFlow.
 
 The following is an example execution of the configure script:
@@ -261,35 +275,46 @@ The following is an example execution of the configure script:
     Not configuring the WORKSPACE for Android builds.
 
     Configuration finished
+
 Build the pip package
+
 To build a pip package for TensorFlow-GPU, invoke the following command:
 
     $ bazel build --config=opt --config=cuda --incompatible_load_argument_is_label=false //tensorflow/tools/pip_package:build_pip_package
 
     NOTE: This process will take about an hour, so open up a beer and play your favourite video game for a bit
+
 The bazel build command builds a script named build_pip_package. Running this script as follows will build a .whl file within the tensorflow_pkg folder:
 
-$ bazel-bin/tensorflow/tools/pip_package/build_pip_package tensorflow_pkg
+    $ bazel-bin/tensorflow/tools/pip_package/build_pip_package tensorflow_pkg
+
 Install the pip package
+
 a) Create and activate a virtual environment
 
 b) Invoke pip install to install that pip package
 
-$ sudo pip install tensorflow_pkg/tensorflow*
+    $ sudo pip install tensorflow_pkg/tensorflow*
+
 Validate your installation
+
 a) Invoke python:
 
-$ python
+    $ python
+    
 b) Enter the following short program inside the python interactive shell:
 
     import tensorflow as tf
     hello = tf.constant('Hello, TensorFlow!')
     sess = tf.Session()
     print(sess.run(hello))
+    
 If the system outputs the following, then you are ready to begin writing TensorFlow programs:
 
 Hello, TensorFlow!
-THE END
+
+# THE END
+
 For more information, please visit the following links:
 
 a) CUDA toolkit documentation
