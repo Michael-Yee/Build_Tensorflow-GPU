@@ -14,6 +14,7 @@ If you do not see any settings, update the PCI hardware database that Linux main
 If your graphics card is from NVIDIA and it is listed in http://developer.nvidia.com/cuda-gpus, your GPU is CUDA-capable.
 
 NOTE: Write down the Compute Capability value for later use in section: Installing TensorFlow from sources - Configure the installation
+
 b) Verify your NVIDIA graphics driver is 384.81 or newer
 
     $ nvidia-smi
@@ -179,7 +180,7 @@ c) Run the mnistCUDNN sample
 
 If cuDNN is properly installed and running, you will see a message similar to the following:
 
-Test passed!
+    Test passed!
 
 NOTE: cuDNN v7 can coexist with previous versions of cuDNN, such as v5 or v6
 Installing TensorFlow from sources
