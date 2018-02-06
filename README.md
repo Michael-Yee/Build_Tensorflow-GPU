@@ -1,4 +1,4 @@
-#How to build Tensorflow-GPU from source
+# How to build Tensorflow-GPU from source
 
 By Michael Yee
 
@@ -60,60 +60,74 @@ The first and most important line containing x86_64, indicates you are running o
 
 d) Update all the Ubuntu things!
 
-$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
+    $ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
+    
 e) Verify your kernel version is supported and the correct development packages are installed
 
-$ uname -r
+    $ uname -r
+    
 You should see output similar to the following:
 
-4.4.0-104-generic
+    4.4.0-104-generic
 
 NOTE: NVIDIA recommend a kernel version of 4.4, otherwise the NVIDIA driver may not start.  
 The kernel headers and development packages for the currently running kernel can be installed with:
 
-$ sudo apt-get install linux-headers-$(uname -r)
+    $ sudo apt-get install linux-headers-$(uname -r)
+    
 f) Install dependencies (you need this things to build from source)
 
-$ sudo apt-get install build-essential cmake python3-dev python3-numpy python3-pip python3-wheel unzip
-libcupti (NVIDIA CUDA Profiler Tools Interface development files)
+    $ sudo apt-get install build-essential cmake python3-dev python3-numpy python3-pip python3-wheel unzip libcupti (NVIDIA CUDA Profiler Tools Interface development files)
 
-$ sudo apt-get install libcupti-dev
-$ echo 'export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+    $ sudo apt-get install libcupti-dev
+    $ echo 'export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+
 Java JDK (Bazel requires Java JDK 8 or later)
 
-$ sudo apt-get install openjdk-8-jdk
-$ echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+    $ sudo apt-get install openjdk-8-jdk
+    $ echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+
 Bazel (Bazel is an open-source build and test tool)
 
-$ curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
-$ sudo apt-get update && sudo apt-get install bazel
-$ sudo apt-get upgrade bazel
-Step Two: CUDA
+    $ curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
+    $ sudo apt-get update && sudo apt-get install bazel
+    $ sudo apt-get upgrade bazel
+
+## Step Two: CUDA
+
 Download CUDA
-$ wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.1.85-1_amd64.deb
+
+    $ wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.1.85-1_amd64.deb
+
 Install CUDA
 a) Install repository meta-data
 
-$ sudo dpkg -i cuda-repo-ubuntu1604_9.1.85-1_amd64.deb
+   $ sudo dpkg -i cuda-repo-ubuntu1604_9.1.85-1_amd64.deb
+   
 b) Installing the CUDA public GPG key using network repo:
 
-$ sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
+    $ sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
+    
 c) Update the Apt repository cache
 
-$ sudo apt-get update
+    $ sudo apt-get update
+    
 d) Install CUDA
 
-$ sudo apt-get install cuda
+    $ sudo apt-get install cuda
+    
 CUDA environment set-up
 a) The PATH variable needs to include /usr/local/cuda-9.1/bin and the LD_LIBRARY_PATH variable needs to contain /usr/local/cuda-9.1/lib64
 
 Edit ~/.bashrc and save the following to the end of the file:
 
-export PATH=/usr/local/cuda-9.1/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+    export PATH=/usr/local/cuda-9.1/bin${PATH:+:${PATH}}
+    export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
 b) Restart system
 
-Step Three: cuDNN
+## Step Three: cuDNN
+
 Download cuDNN
 In order to download the required cuDNN files, ensure you are registered for the NVIDIA Developer Program.
 
@@ -126,26 +140,32 @@ a) Navigate to the directory containing cuDNN Debian files
 
 b) Install the runtime library
 
-$ sudo dpkg -i libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb
+    $ sudo dpkg -i libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb
+
 c) Install the developer library
 
-$ sudo dpkg -i libcudnn7-dev_7.0.3.11-1+cuda9.0_amd64.deb
+    $ sudo dpkg -i libcudnn7-dev_7.0.3.11-1+cuda9.0_amd64.deb
+
 d) Install the code samples and the cuDNN Library User Guide
 
-$ sudo dpkg -i libcudnn7-doc_7.0.3.11-1+cuda9.0_amd64.deb
+    $ sudo dpkg -i libcudnn7-doc_7.0.3.11-1+cuda9.0_amd64.deb
+
 Verify the installation
 To verify that cuDNN is installed and is running properly, compile the mnistCUDNN sample located in the /usr/src/cudnn_samples_v7 directory in the debian file.
 
 a) Copy the cuDNN sample to a writable path and go to that folder
 
-$ cp -r /usr/src/cudnn_samples_v7/ $HOME
-$ cd $HOME/cudnn_samples_v7/mnistCUDNN
+    $ cp -r /usr/src/cudnn_samples_v7/ $HOME
+    $ cd $HOME/cudnn_samples_v7/mnistCUDNN
+
 b) Compile the mnistCUDNN sample
 
-$ make clean && make
+    $ make clean && make
+    
 c) Run the mnistCUDNN sample
 
-$ ./mnistCUDNN
+    $ ./mnistCUDNN
+
 If cuDNN is properly installed and running, you will see a message similar to the following:
 
 Test passed!
@@ -157,13 +177,16 @@ a) Create and navigate to a directory to containing TensorFlow files
 
 b) Download TensorFlow
 
-$ wget https://github.com/tensorflow/tensorflow/archive/v1.5.0-rc1.zip
+    $ wget https://github.com/tensorflow/tensorflow/archive/v1.5.0-rc1.zip
+    
 c) Unzip TensorFlow
 
-$ unzip v1.5.0-rc1.zip
+    $ unzip v1.5.0-rc1.zip
+    
 d) Navigate into the unzipped TensorFlow folder
 
-$ cd tensorflow-1.5.0-rc1 
+    $ cd tensorflow-1.5.0-rc1 
+    
 Configure the installation
 The root of the source tree contains a bash script named configure. This script asks you to identify the pathname of all relevant TensorFlow dependencies and specify other build configuration options such as compiler flags. You must run this script prior to creating the pip package and installing TensorFlow.
 
