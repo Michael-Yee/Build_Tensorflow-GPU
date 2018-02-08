@@ -2,7 +2,7 @@
 
 By Michael Yee
 
-In this blog, I will be describing the step by step instructions to install TensorFlow-GPU version 1.5.0-rc1 into a Python 3.5 Virtualenv environment on Ubuntu 16.04 (64bit).
+In this blog, I will be describing the step by step instructions to install TensorFlow-GPU version 1.5.0 into a Python 3.6 Virtualenv environment on Ubuntu 16.04 (64bit).
 
 ## Step 1: Pre-installation
 a) Verify the system has a CUDA-capable GPU
