@@ -191,15 +191,15 @@ a) Create and navigate to a directory to containing TensorFlow files
 
 b) Download TensorFlow
 
-    $ wget https://github.com/tensorflow/tensorflow/archive/v1.5.0-rc1.zip
+    $ wget https://github.com/tensorflow/tensorflow/archive/v1.5.0.zip
     
 c) Unzip TensorFlow
 
-    $ unzip v1.5.0-rc1.zip
+    $ unzip v1.5.0.zip
     
 d) Navigate into the unzipped TensorFlow folder
 
-    $ cd tensorflow-1.5.0-rc1 
+    $ cd tensorflow-1.5.0
     
 Configure the installation
 
@@ -210,14 +210,14 @@ The following is an example execution of the configure script:
     $ ./configure
 
     You have bazel 0.9.0 installed.
-    Please specify the location of python. [Default is /home/michael/python3.5-venv/bin/python]: /home/michael/python3.5-venv/bin/python
+    Please specify the location of python. [Default is /home/mike/venv/python3.6-venv/bin/python]: /home/mike/venv/python3.6-venv/bin/python
     Traceback (most recent call last):
       File "<string>", line 1, in <module>
     AttributeError: module 'site' has no attribute 'getsitepackages'
     Found possible Python library paths:
-      /home/michael/python3.5-venv/lib/python3.5/site-packages
-    Please input the desired Python library path to use.  Default is [/home/michael/python3.5-venv/lib/python3.5/site-packages]
-    /home/michael/python3.5-venv/lib/python3.5/site-packages
+      /home/mike/venv/python3.6-venv/lib/python3.6/site-packages
+    Please input the desired Python library path to use.  Default is [/home/mike/venv/python3.6-venv/lib/python3.6/site-packages]
+    /home/michael/python3.6-venv/lib/python3.6/site-packages
 
     Do you wish to build TensorFlow with jemalloc as malloc support? [Y/n]: Y
     jemalloc as malloc support will be enabled for TensorFlow.
@@ -291,9 +291,9 @@ The bazel build command builds a script named build_pip_package. Running this sc
 
 Install the pip package
 
-a) Create and activate a virtual environment
+a) Create and activate a python 3.6 virtual environment
 
-b) Invoke pip install to install that pip package
+b) Invoke pip install to install the pip package
 
     $ sudo pip install tensorflow_pkg/tensorflow*
 
