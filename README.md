@@ -1,6 +1,6 @@
-# Michael Yee's TensorFlow bolg
+# Michael Yee's TensorFlow blogs and code
 
-## This repository serves to hold blogs and projects that I'm both working on and have completed
+This repository serves to hold blogs and code that I'm both working on and have completed
 
 ## Blogs
 
